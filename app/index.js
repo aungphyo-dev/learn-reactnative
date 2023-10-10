@@ -64,12 +64,19 @@ const index = () => {
         setQuery("")
         callerPostAll()
     }
+    const fetchMore = () => {
+      if (!isLoading){
+          setCurrentPage(prevState =>  prevState + 1)
+      }
+    }
     return (
         <FlatList
                 contentContainerStyle={tw`py-3 px-1.5 gap-y-1`}
                 data={posts?.data}
                 renderItem={ ({item}) => <Card blog={item}/>}
                 keyExtractor={blog=>blog.id}
+                // onEndReachedThreshold={0.1}
+                // onEndReached={fetchMore}
             />
     );
 };
