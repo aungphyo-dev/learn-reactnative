@@ -66,7 +66,7 @@ const index = () => {
     }
     return (
         <FlatList
-                contentContainerStyle={tw`p-3 gap-y-5`}
+                contentContainerStyle={tw`py-3 px-1.5 gap-y-1`}
                 data={posts?.data}
                 renderItem={ ({item}) => <Card blog={item}/>}
                 keyExtractor={blog=>blog.id}
