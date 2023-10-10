@@ -1,6 +1,8 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Text, View} from "react-native";
+import {FlatList, ScrollView} from "react-native";
 import supabase from "../supabase/supabase";
+import tw from "twrnc"
+import Card from "../components/Card";
 const index = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
@@ -62,16 +64,13 @@ const index = () => {
         setQuery("")
         callerPostAll()
     }
-
     return (
-        <View>
-            <Text>
-                Hello
-            </Text>
-                <View>
-                    {posts?.data?.map(d => <Text>{d.title}</Text>)}
-                </View>
-        </View>
+        <FlatList
+                contentContainerStyle={tw`p-3 gap-y-5`}
+                data={posts?.data}
+                renderItem={ ({item}) => <Card blog={item}/>}
+                keyExtractor={blog=>blog.id}
+            />
     );
 };
 

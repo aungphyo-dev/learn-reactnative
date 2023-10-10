@@ -16,6 +16,7 @@ const layout = () => {
             screenOptions={{
                 headerTitle: props => <LogoTitle {...props} /> ,
                 headerStyle: {
+                    paddingBottom:15,
                     backgroundColor: '#f4511e',
                 },
                 headerTintColor: '#fff',
@@ -26,3 +27,4 @@ const layout = () => {
         />
     );
 };
+export default layout
