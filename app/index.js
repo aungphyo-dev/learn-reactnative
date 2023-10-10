@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {Text, View} from "react-native";
 import supabase from "../supabase/supabase";
-
+import "../style.css"
 const index = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
