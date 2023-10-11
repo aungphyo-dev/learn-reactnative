@@ -68,7 +68,7 @@ const index = () => {
         callerPostAll()
     }
     const fetchMore = () => {
-      if (!isLoading && currentPage <=totalPages){
+      if (!isLoading && currentPage < totalPages){
           setCurrentPage(prevState =>  prevState + 1)
       }
     }
@@ -91,6 +91,7 @@ const index = () => {
     };
     return (
         <FlatList
+            showsVerticalScrollIndicator={false}
                 contentContainerStyle={tw`py-3 gap-y-1`}
                 data={posts?.data}
                 renderItem={ ({item}) => <Card blog={item}/>}
