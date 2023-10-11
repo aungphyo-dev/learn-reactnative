@@ -17,7 +17,7 @@ const layout = () => {
                 headerTitle: props => <LogoTitle {...props} /> ,
                 headerStyle: {
                     paddingBottom:15,
-                    backgroundColor: '#f4511e',
+                    backgroundColor: '#484645',
                 },
                 headerTintColor: '#fff',
                 headerTitleStyle: {

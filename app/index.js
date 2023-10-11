@@ -1,8 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {FlatList, ScrollView} from "react-native";
+import {ActivityIndicator, FlatList, Text, TouchableOpacity, View} from "react-native";
 import supabase from "../supabase/supabase";
 import tw from "twrnc"
 import Card from "../components/Card";
+import tabs from "expo-router/src/layouts/Tabs";
 const index = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
@@ -15,6 +16,7 @@ const index = () => {
         setCurrentPage(value);
     };
     const callerPost = useCallback(async () => {
+        setIsLoading(true)
         const data = await supabase
             .from('blogs')
             .select(`*,categories(*),user_profiles(*)`)
@@ -30,6 +32,7 @@ const index = () => {
         setIsLoading(false)
     }, [currentPage,pageSize,query])
     const callerPostAll = useCallback(async () => {
+        setIsLoading(true)
         const data = await supabase
             .from('blogs')
             .select(`*,categories(*),user_profiles(*)`)
@@ -65,18 +68,35 @@ const index = () => {
         callerPostAll()
     }
     const fetchMore = () => {
-      if (!isLoading){
+      if (!isLoading && currentPage <=totalPages){
           setCurrentPage(prevState =>  prevState + 1)
       }
     }
+    const renderFooter = () => {
+        return (
+            //Footer View with Load More button
+            <View style={tw`flex-row justify-center items-center p-10`}>
+                <TouchableOpacity
+                    activeOpacity={0.9}
+                    onPress={fetchMore}
+                    //On Click of button calling getData function to load more data
+                    style={tw`bg-[#800000] rounded flex-row justify-center items-center px-10 py-2`}>
+                    <Text style={tw`text-center text-white text-[15px]`}>Load More</Text>
+                    {isLoading ? (
+                        <ActivityIndicator color="white" style={{marginLeft: 8}} />
+                    ) : null}
+                </TouchableOpacity>
+            </View>
+        );
+    };
     return (
         <FlatList
-                contentContainerStyle={tw`py-3 px-1.5 gap-y-1`}
+                contentContainerStyle={tw`py-3 gap-y-1`}
                 data={posts?.data}
                 renderItem={ ({item}) => <Card blog={item}/>}
                 keyExtractor={blog=>blog.id}
-                // onEndReachedThreshold={0.1}
-                // onEndReached={fetchMore}
+                enableEmptySections={true}
+                ListFooterComponent={renderFooter}
             />
     );
 };
