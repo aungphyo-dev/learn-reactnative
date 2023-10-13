@@ -26,36 +26,34 @@ const Detail = () => {
         getPost()
     }, [dd]);
     return (
-        <ScrollView>
-            <Stack.Screen
-                options={{
-                    title: 'Detail',
-                    headerStyle: { backgroundColor: '#f4511e' },
-                    headerTintColor: '#fff',
-                    headerTitleStyle: {
-                        fontWeight: 'bold',
-                    },
-                    headerTitle:"Detail",
-                }}
-            />
+      <ScrollView>
+        <Stack.Screen
+          options={{
+            title: "Detail",
+            headerStyle: { backgroundColor: "#ffffff" },
+            headerTintColor: "#000",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+            headerTitle: "Detail",
+          }}
+        />
 
-            <View>
-                <Image source={{uri:post?.image}} style={tw`w-full h-64`}/>
-            </View>
-            <View style={tw`p-3`}>
-                <View>
-                    <Text style={tw`text-[15px] font-semibold mb-1`}>
-                        {!isLoading && post.title}
-                    </Text>
-                    <Text style={tw`text-[8px]`}>
-                         {!isLoading && `by ${post.user_profiles?.name}`}
-                    </Text>
-                </View>
-                <Text>
-                    {post.description}
-                </Text>
-            </View>
-            </ScrollView>
+        <View>
+          <Image source={{ uri: post?.image }} style={tw`w-full h-64`} />
+        </View>
+        <View style={tw`p-3`}>
+          <View>
+            <Text style={tw`text-[15px] font-semibold mb-1`}>
+              {!isLoading && post.title}
+            </Text>
+            <Text style={tw`text-[8px]`}>
+              {!isLoading && `by ${post.user_profiles?.name}`}
+            </Text>
+          </View>
+          <Text>{post.description}</Text>
+        </View>
+      </ScrollView>
     );
 };
 
